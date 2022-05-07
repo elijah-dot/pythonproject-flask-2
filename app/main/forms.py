@@ -7,3 +7,11 @@ class PitchForm(FlaskForm):
     category = SelectField('Pitch Category')
     pitch = TextAreaField('Pitch')
     submit = SubmitField('Submit')
+
+class CommentForm(FlaskForm):
+    comment = TextAreaField('Comment')
+    submit = SubmitField('Post Comment')
+    
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('What you aspire to be in life', validators=[Required()])
+    submit = SubmitField('Submit')
