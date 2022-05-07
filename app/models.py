@@ -38,7 +38,7 @@ class User(UserMixin,db.Model):
         return f'User {self.username}'
     
 #model class for pitches
-class Pitch(models.Model):
+class Pitch(db.Model):
     __tablename__ = 'pitches'
     id = db.Column(db.integer, primary_key=True)
     title = db.Column(db.string(255), nullable=False)
@@ -60,7 +60,31 @@ class Pitch(models.Model):
         return f'pitch {self.post}'
     
     #model class for comments
+    class Comment(db.Model):
+        __tablename__ = 'comments'
+        
+        id = db.Column(db.Integer,primary_key=True)
+        comment = db.Column(db.Text(),nullable=False)
+        user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable = False)
+        pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'),nullable = False)
+        
+    def save_c(self):
+        db.session.add(self)
+        db.session.commit()
+        
+    @classmethod
+    def get_comments(cls,pitch_id):
+        comments = Comment.query.filter_by(pitch_id=pitch_id).all()
+        
+        return comments
     
+    
+    def __repr__(self):
+        return f'comment:{self.comment}'
+    
+    
+        
+        
     
     
 
