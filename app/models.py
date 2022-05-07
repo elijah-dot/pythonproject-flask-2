@@ -36,10 +36,34 @@ class User(UserMixin,db.Model):
         
     def __repr__(self):
         return f'User {self.username}'
-
+    
+#model class for pitches
+class Pitch(models.Model):
+    __tablename__ = 'pitches'
+    id = db.Column(db.integer, primary_key=True)
+    title = db.Column(db.string(255), nullable=False)
+    post = db.Column(db.Text(),nullable=False)
+    # user oriented
+    comment = db.relationship('Comment', backref= 'user',lazy= 'dynamic')
+    upvote = db.relationship('Upvote', backref= 'user',lazy= 'dynamic')
+    downvote= db.relationship('Downvote', backref= 'user',lazy= 'dynamic')
+    
+    user_id = db.Column(db.integer,db.ForeignKey('users.id'))
+    time = db.Column(db.Datetime,default=datetime.utcnow)
+    category = db.Column(db.String(255),index=True,nullable=False)
+    
+    def save_p(self):
+        db.session.add(self)
+        db.session.commit()
+        
+    def __repr__(self):
+        return f'pitch {self.post}'
+    
+    #model class for comments
+    
+    
     
 
 #model class for category
-#model class for pitches
+
 #model class for votes
-#model class for comments
