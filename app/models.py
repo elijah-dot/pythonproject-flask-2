@@ -17,6 +17,27 @@ class User(UserMixin,db.Model):
     comment = db.relationship('Comment', backref= 'user',lazy= 'dynamic')
     upvote = db.relationship('Upvote', backref= 'user',lazy= 'dynamic')
     downvote= db.relationship('Downvote', backref= 'user',lazy= 'dynamic')
+    # commit and save
+    
+    @property
+    def set_password(self):
+        raise AttributeError('you cannot read the password')
+    
+    @set_password.setter
+    def password(self,password):
+        self.secure_password = generate_password_hash(password)
+        
+    def verify_password(self,password):
+        return check_password_hash(self,secure_password,password)
+    
+    def save_u(self):
+        db.session.add()
+        db.session.commit()
+        
+    def __repr__(self):
+        return f'User {self.username}'
+
+    
 
 #model class for category
 #model class for pitches
