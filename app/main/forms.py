@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField
-from wtforms.validators import login_required
+from wtforms import StringField,TextAreaField,SubmitField,SelectField
+from wtforms.validators import DataRequired
 
 class PitchForm(FlaskForm):
     title = StringField('Pitch Title')
@@ -13,5 +13,5 @@ class CommentForm(FlaskForm):
     submit = SubmitField('Post Comment')
     
 class UpdateProfile(FlaskForm):
-    bio = TextAreaField('What you aspire to be in life', validators=[Required()])
+    bio = TextAreaField('What you aspire to be in life', validators=[DataRequired()])
     submit = SubmitField('Submit')

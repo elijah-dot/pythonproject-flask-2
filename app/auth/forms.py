@@ -1,13 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField ,PasswordField,BooleanField,ValidationError
-from wtforms.validators import Required,Email,EqualTo
+from wtforms import StringField,PasswordField,BooleanField,SubmitField,ValidationError
+from wtforms.validators import Email,EqualTo,DataRequired
 from ..models import User
+
 
 class RegistrationForm(FlaskForm):
     email = StringField('enter your email address')
     author = StringField('Enter your name')
-    password = StringField('Enter your password', validators=[Required(),EqualTo('password_confirm',message='password must match')])
-    password_confirm = PasswordField('Confirm passwords', validators=[Required()])
+    password = StringField('Enter your password', validators=[DataRequired(),EqualTo('password_confirm',message='password must match')])
+    password_confirm = PasswordField('Confirm passwords', validators=[DataRequired()])
     submit = StringField('Sing up')
     
     def validate_email(self,data_field):
@@ -20,7 +21,7 @@ class RegistrationForm(FlaskForm):
         
 class LoginForm(FlaskForm):
     email = StringField('Your Email Address')
-    password = PasswordField('Password',validators = [Required(),Email()])
+    password = PasswordField('Password',validators = [DataRequired(),Email()])
     remember = BooleanField('Remember me')
     submit = SubmitField('Sign in')
     
