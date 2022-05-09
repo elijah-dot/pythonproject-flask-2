@@ -2,14 +2,14 @@
 endif %}
 <br />
 <br />
-<div class="container">
+<div class="container path">
   <div class="row">
     <!-- displaying  Username-->
     <div class="col-md-4">
       <h3>Author: {{user.author| capitalize}}</h3>
       <br />
       <hr />
-      <a href="{{url_for('main.update_profile',uname=user.author)}}"
+      <a class="image" href="{{url_for('main.update_profile',uname=user.author)}}"
         >Edit profile</a
       >
       <!--Displaying user bio-->
@@ -26,13 +26,14 @@ endif %}
     <div class="col-md-8">
       {% if user.profile_pic_path %}
 
-      <div class="card">
+      <div class="card image">
         <img
+         
           class="card"
           src="{{url_for('static',filename=user.profile_pic_path)}}"
           alt=""
           class="img-thumbnail"
-          height="50%"
+          height="40%"
         />
       </div>
       <div class="row">
