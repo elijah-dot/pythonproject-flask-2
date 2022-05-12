@@ -1,4 +1,4 @@
-# pitch
+# Pitch
 
 ### By Elijah Mwangi Wangu.
 
